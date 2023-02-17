@@ -1,0 +1,17 @@
+
+# Ignore all files ending in .log
+/logs
+# Ignore IntelliJ's files and directories
+.idea/
+*.iml
+# Project-local glide cache, regenerated when needed
+/vendor
+# Binaries for programs and plugins
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+
+# Test binary, built with `go test -c`
+*.test

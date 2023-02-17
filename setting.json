@@ -1,0 +1,56 @@
+{
+  "GlogConfig": {
+  "MaxSize": 256,
+  "V": 8
+  },
+  "UDPServer":{
+    "Host": "10.51.28.225",
+    "Port": 7000
+  },
+  "RadiusConfig": {
+    "Secret": "bigdata@2022"
+  },
+  "HbaseConfig": {
+    "Host": "10.51.28.225",
+    "Port": 2181
+  },
+  "ThreadWorker": {
+    "NumberThreadRadius": 1000,
+    "NumberThreadIdentity": 1000
+  },
+  "SchemaHbase": {
+    "MDO": {
+      "NameTable": "mdo",
+      "ColumFamily1MDO": {
+        "Name": "radius",
+        "QualifierNameCF1MDO": {
+          "Timestamp": "ts",
+          "Type": "type",
+          "Phone": "phone",
+          "IPPrivate": "ippr"
+        }
+      },
+      "RadiusTTLHour": 100
+    },
+    "Identity": {
+      "NameTable": "identity",
+      "ColumFamily1Identity": {
+        "Name": "iaccess",
+        "QualifierNameCF1Identity": {
+          "Timestamp": "ts",
+          "Phone": "phone"
+        }
+      },
+      "ColumFamily2Identity": {
+        "Name": "idetail",
+        "QualifierNameCF2Identity": {
+          "IPPrivate": "ippr",
+          "PortPrivate": "portpr",
+          "IPDestination": "ipdest",
+          "PortDestination": "portdest"
+        }
+      },
+      "SyslogTTLHour": 1
+    }
+  }
+}
