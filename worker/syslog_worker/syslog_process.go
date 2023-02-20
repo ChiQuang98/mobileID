@@ -14,8 +14,11 @@ func MappingSyslog(clientHbase gohbase.Client, schemaIdentity settings.Identity,
 	for record := range identityChan {
 		//20230218001800,10.74.178.225,40954,42.1.64.19,443
 		attributes := strings.Split(string(record), ",")
+		currentTime := time.Now().Format("20060102150405")
+		//glog.Info("===CurrentTime: ", currentTime)
+		//glog.Info("===syslogtime: ", attributes[0])
 		identity := models.Identity{
-			Timestamp:       attributes[0],
+			Timestamp:       currentTime,
 			IPPrivate:       attributes[1],
 			PortPrivate:     attributes[2],
 			IPDestination:   attributes[3],

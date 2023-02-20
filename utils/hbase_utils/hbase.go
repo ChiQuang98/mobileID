@@ -122,7 +122,7 @@ func PutRadiusRecordToHbase(clientHbase gohbase.Client, mdoSchema settings.MDO, 
 	CF1 := mdoSchema.ColumFamily1MDO
 	TTL := time.Duration(mdoSchema.RadiusTTLHour) * time.Hour
 	rowKey := radius.IPPrivate
-	glog.Info("=RowKey table MDO=====>", rowKey)
+	//glog.Info("=RowKey table MDO=====>", rowKey)
 	values := map[string]map[string][]byte{CF1.Name: map[string][]byte{
 		CF1.QualifierNameCF1MDO.Timestamp: []byte(radius.Timestamp),
 		CF1.QualifierNameCF1MDO.Type:      []byte(radius.Type),
@@ -148,7 +148,7 @@ func PutIdentityResultRecordToHbase(clientHbase gohbase.Client, identitySchema s
 	TTL := time.Duration(identitySchema.SyslogTTLHour) * time.Hour
 	//Query by ipdestination and phone
 	rowKey := identity.IPDestination + "|" + identity.Phone
-	glog.Info("=RowKey table identity=====>", rowKey)
+	//glog.Info("=RowKey table identity=====>", rowKey)
 	values := map[string]map[string][]byte{
 		CF1_iaccess.Name: map[string][]byte{
 			CF1_iaccess.QualifierNameCF1Identity.Timestamp: []byte(identity.Timestamp),
