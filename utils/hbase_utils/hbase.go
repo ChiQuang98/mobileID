@@ -141,13 +141,12 @@ func PutRadiusRecordToHbase(clientHbase gohbase.Client, mdoSchema settings.MDO, 
 	//println(rsp.String())
 	return nil
 }
-func PutIdentityResultRecordToHbase(clientHbase gohbase.Client, identitySchema settings.Identity, identity models.Identity) error {
+func PutIdentityResultRecordToHbase(clientHbase gohbase.Client, identitySchema settings.Identity, identity models.Identity, rowKey string) error {
 	// Create the Put request
 	CF1_iaccess := identitySchema.ColumFamily1Identity
 	CF2_idetail := identitySchema.ColumFamily2Identity
 	TTL := time.Duration(identitySchema.SyslogTTLHour) * time.Hour
 	//Query by ipdestination and phone
-	rowKey := identity.IPDestination + "|" + identity.Phone
 	//glog.Info("=RowKey table identity=====>", rowKey)
 	values := map[string]map[string][]byte{
 		CF1_iaccess.Name: map[string][]byte{

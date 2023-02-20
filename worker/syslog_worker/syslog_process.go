@@ -45,7 +45,13 @@ func MappingSyslog(clientHbase gohbase.Client, schemaIdentity settings.Identity,
 		//If timestamp phonenumber accessing internet web is after timestamp that phonenumber is assigned ipprivate
 		if (record_radius.IPPrivate == identity.IPPrivate) &&
 			(timeAccessInternet.After(timeAssignIPPrivate) || timeAccessInternet.Equal(timeAccessInternet)) {
-			err = hbase_utils.PutIdentityResultRecordToHbase(clientHbase, schemaIdentity, identity)
+			rowKeyWithOutPort := identity.IPDestination + "|" + identity.Phone
+			rowKeyWithPort := identity.IPDestination + "|" + identity.Phone + "|" + identity.PortDestination
+			err = hbase_utils.PutIdentityResultRecordToHbase(clientHbase, schemaIdentity, identity, rowKeyWithOutPort)
+			if err != nil {
+				glog.Error("Error put identity record to Hbase ", err)
+			}
+			err = hbase_utils.PutIdentityResultRecordToHbase(clientHbase, schemaIdentity, identity, rowKeyWithPort)
 			if err != nil {
 				glog.Error("Error put identity record to Hbase ", err)
 			}
