@@ -4,6 +4,7 @@ import (
 	"MobileID/models"
 	"MobileID/utils/settings"
 	"context"
+	"errors"
 	"github.com/golang/glog"
 	"github.com/tsuna/gohbase"
 	"github.com/tsuna/gohbase/hrpc"
@@ -101,6 +102,9 @@ func GetRadiusRecordByRowkey(clientHbase gohbase.Client, mdoSchema settings.MDO,
 		return err, radius
 	}
 	cells := getRsp.Cells
+	if len(cells) < 4 {
+		return errors.New("Len of result MDO is not greater than 4, len is " + strconv.Itoa(len(cells))), radius
+	}
 	// process the row data
 	//This is the extractly order of hbase return value
 	radius.IPPrivate = string(cells[0].Value)

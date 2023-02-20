@@ -24,6 +24,7 @@ func CreateServerRadius(secret string, packetChRadius chan<- models.Radius) radi
 		status := rfc2866.AcctStatusType_Get(r.Packet).String()
 		phonenumber := rfc2865.CallingStationID_GetString(r.Packet)
 		ipprivate := rfc2865.FramedIPAddress_Get(r.Packet).String()
+
 		//message := "RadiusMessage"
 		//yyyyMMddHHmmSS
 		timestamp := time.Now().Format("20060102150405")
